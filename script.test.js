@@ -281,3 +281,12 @@ test("savePromptToHistory trims new prompts and deduplicates normalized variants
   assert.equal(history.length, 1);
   assert.equal(history[0].prompt, "Build a useful tool");
 });
+
+test("removePromptFromHistory returns safely when storage reads fail", () => {
+  global.localStorage.getItem = () => {
+    throw new Error("Storage is unavailable");
+  };
+
+  assert.doesNotThrow(() => removePromptFromHistory(0));
+  assert.deepEqual(removePromptFromHistory(0), []);
+});
