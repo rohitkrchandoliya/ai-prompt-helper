@@ -290,3 +290,13 @@ test("removePromptFromHistory returns safely when storage reads fail", () => {
   assert.doesNotThrow(() => removePromptFromHistory(0));
   assert.deepEqual(removePromptFromHistory(0), []);
 });
+
+test("savePromptToHistory can create an in-memory result when storage reads fail", () => {
+  global.localStorage.getItem = () => {
+    throw new Error("Storage is unavailable");
+  };
+
+  const history = savePromptToHistory("A prompt while storage is unavailable");
+  assert.equal(history.length, 1);
+  assert.equal(history[0].prompt, "A prompt while storage is unavailable");
+});
