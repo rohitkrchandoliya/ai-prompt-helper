@@ -390,3 +390,12 @@ test("planning purpose produces actionable steps, timelines, dependencies, and r
   assert.match(prompt, /dependencies/i);
   assert.match(prompt, /risks and checkpoints/i);
 });
+
+test("data analysis purpose asks for methods, patterns, and limitations", () => {
+  const prompt = improvePrompt("Analyze monthly sales", "dataAnalysis");
+  assert.match(prompt, /Act as an expert assistant for: dataAnalysis/);
+  assert.match(prompt, /data quality/i);
+  assert.match(prompt, /key patterns/i);
+  assert.match(prompt, /limitations/i);
+  assert.match(prompt, /without overstating causation/i);
+});
