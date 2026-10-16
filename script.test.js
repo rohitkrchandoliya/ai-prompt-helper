@@ -592,3 +592,8 @@ test("clearPromptHistory safely handles storage removal failures", () => {
   global.localStorage.removeItem = () => { throw new Error("Storage is unavailable"); };
   assert.doesNotThrow(() => clearPromptHistory());
 });
+
+test("improvePrompt falls back to general guidance for incorrectly cased purposes", () => {
+  const prompt = improvePrompt("Explain a concept", "Learning");
+  assert.match(prompt, /Act as an expert assistant for: general/);
+});
