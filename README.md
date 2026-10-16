@@ -125,3 +125,8 @@ Prompt-history JSON imports are limited to 1 MB. If an export is larger, open it
 ### Where saved prompts are stored
 
 Prompt history is stored in this browser's local storage on this device. It is not automatically synced to another browser or device. Clearing site data or using a different browser profile can remove or hide the saved history, so export a JSON backup if you need to keep it.
+
+
+### Troubleshooting: history does not persist
+
+If saved prompts disappear after closing the page, check whether the browser blocks site storage, runs in private browsing mode, or clears site data on exit. Export your prompt history before clearing browser data. If storage is unavailable, history may not persist between sessions.
