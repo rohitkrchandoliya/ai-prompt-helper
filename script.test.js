@@ -643,3 +643,10 @@ test("savePromptToHistory detects duplicates in legacy string entries", () => {
   assert.equal(history.length, 1);
   assert.equal(history[0].prompt, "Legacy prompt");
 });
+
+test("savePromptToHistory preserves unrelated existing entries", () => {
+  savePromptToHistory("Older prompt");
+  savePromptToHistory("Another prompt");
+  savePromptToHistory("Newest prompt");
+  assert.deepEqual(getPromptHistory().map(item => item.prompt), ["Newest prompt", "Another prompt", "Older prompt"]);
+});
