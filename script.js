@@ -18,8 +18,8 @@ function improvePrompt(idea, purpose = "general") {
     business: "Clarify the target audience, business objective, constraints, risks, and measurable success criteria.",
     creative: "Offer original ideas, explore distinct directions, and explain the creative choices.",
     resume: "Use concise, achievement-focused language, strong action verbs, and measurable results without inventing experience.",
-    planning: "Break the goal into actionable steps, estimate timelines, identify dependencies, and include risks and checkpoints."
-    ,dataAnalysis: "Clarify the question, inspect data quality, explain the method, summarize key patterns, and state limitations without overstating causation."
+    planning: "Break the goal into actionable steps, estimate timelines, identify dependencies, and include risks and checkpoints.",
+    dataAnalysis: "Clarify the question, inspect data quality, explain the method, summarize key patterns, and state limitations without overstating causation."
   };
 
   const normalizedPurpose = Object.hasOwn(purposeInstructions, purpose)
