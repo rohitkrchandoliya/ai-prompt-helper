@@ -523,3 +523,13 @@ test("savePromptToHistory ignores non-string and blank inputs", () => {
   }
   assert.deepEqual(getPromptHistory(), before);
 });
+
+test("savePromptToHistory returns the updated list when storage writes fail", () => {
+  global.localStorage.setItem = () => {
+    throw new Error("Storage is unavailable");
+  };
+
+  const history = savePromptToHistory("Available in memory only");
+  assert.equal(history.length, 1);
+  assert.equal(history[0].prompt, "Available in memory only");
+});
