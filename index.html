@@ -312,13 +312,19 @@
         const imported = JSON.parse(await file.text());
         if (!Array.isArray(imported)) throw new Error("Expected a JSON array.");
 
+        const seenPrompts = new Set();
         const validPrompts = imported.map((item) => {
           const prompt = typeof item === "string" ? item : item && item.prompt;
           if (typeof prompt !== "string" || !prompt.trim()) return null;
+          const normalizedPrompt = prompt.trim();
+          if (seenPrompts.has(normalizedPrompt)) return null;
+          seenPrompts.add(normalizedPrompt);
+
           const createdAt = item && typeof item === "object" && typeof item.createdAt === "string"
+            && !Number.isNaN(new Date(item.createdAt).getTime())
             ? item.createdAt
             : new Date().toISOString();
-          return { prompt: prompt.trim(), createdAt };
+          return { prompt: normalizedPrompt, createdAt };
         }).filter(Boolean).slice(0, 10);
 
         if (validPrompts.length === 0) throw new Error("No valid prompts were found.");
