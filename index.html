@@ -91,6 +91,8 @@
   <p class="muted">Your 10 most recent prompts are saved in this browser.</p>
   <div id="historyList"></div>
   <button id="exportHistory" type="button">Export history (.json)</button>
+  <label for="importHistoryFile">Import prompt history (.json)</label>
+  <input id="importHistoryFile" type="file" accept=".json,application/json">
   <button id="clearHistory">Clear History</button>
 
   <script src="script.js"></script>
@@ -265,6 +267,34 @@
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
+    });
+
+    document.getElementById("importHistoryFile").addEventListener("change", async (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      try {
+        const imported = JSON.parse(await file.text());
+        if (!Array.isArray(imported)) throw new Error("Expected a JSON array.");
+
+        const validPrompts = imported.map((item) => {
+          const prompt = typeof item === "string" ? item : item && item.prompt;
+          if (typeof prompt !== "string" || !prompt.trim()) return null;
+          const createdAt = item && typeof item === "object" && typeof item.createdAt === "string"
+            ? item.createdAt
+            : new Date().toISOString();
+          return { prompt: prompt.trim(), createdAt };
+        }).filter(Boolean).slice(0, 10);
+
+        if (validPrompts.length === 0) throw new Error("No valid prompts were found.");
+        localStorage.setItem("promptHistory", JSON.stringify(validPrompts));
+        renderHistory();
+        alert(`Imported ${validPrompts.length} prompt(s).`);
+      } catch (error) {
+        alert("Could not import this file. Choose a valid prompt-history JSON export.");
+      } finally {
+        event.target.value = "";
+      }
     });
 
     document.getElementById("clearHistory").addEventListener("click", () => {
