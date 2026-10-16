@@ -478,3 +478,13 @@ test("personal finance purpose covers budgeting and avoids personalized advice c
   assert.match(prompt, /saving options/i);
   assert.match(prompt, /avoid presenting general information as personalized financial advice/i);
 });
+
+test("removePromptFromHistory rejects negative and out-of-range indexes without changing history", () => {
+  savePromptToHistory("First prompt");
+  savePromptToHistory("Second prompt");
+  const before = getPromptHistory();
+
+  assert.deepEqual(removePromptFromHistory(-1), before);
+  assert.deepEqual(removePromptFromHistory(2), before);
+  assert.deepEqual(getPromptHistory(), before);
+});
