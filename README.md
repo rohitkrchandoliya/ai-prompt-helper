@@ -116,3 +116,7 @@ Import is a restore operation, not a merge operation. It replaces the saved list
 ### Keyboard shortcut
 
 While the idea field is focused, press **Ctrl+Enter** on Windows/Linux or **Command+Enter** on macOS to generate a prompt without clicking the Generate button.
+
+### Import file limits
+
+Prompt-history JSON imports are limited to 1 MB. If an export is larger, open it in a text editor and keep only the prompts you want to restore, then save it as a smaller JSON file. The app keeps at most ten valid prompts in history.
