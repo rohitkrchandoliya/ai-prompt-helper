@@ -157,3 +157,16 @@ After changing the interface or prompt-history behavior, open the app in a brows
 - Reload the page and confirm saved history remains available in the same browser profile.
 
 Automated tests (`npm test`) should still pass before submitting changes. Manual checks complement automated tests; they do not replace them.
+
+### Supported import JSON format
+
+The importer expects a JSON array. Each entry may be a prompt string or an object with a `prompt` string and an optional `createdAt` date string. For example:
+
+```json
+[
+  { "prompt": "Explain photosynthesis to a beginner", "createdAt": "2026-01-15T10:30:00.000Z" },
+  "Draft a friendly project update email"
+]
+```
+
+Blank entries and duplicate prompt text are skipped. Imported prompts are trimmed, and at most ten valid prompts are retained. If no valid prompts remain, the import is rejected and the existing history is left unchanged.
