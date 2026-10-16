@@ -10,8 +10,8 @@ function improvePrompt(idea, purpose = "general") {
     general: "Give a clear, useful, well-structured response.",
     learning: "Explain step by step for a beginner and include examples.",
     coding: "Provide working code, explain how it works, and mention edge cases.",
-    writing: "Use clear language, a suitable tone, and a logical structure."
-    research: "Compare reliable sources, explain the evidence, and distinguish facts from assumptions.",
+    writing: "Use clear language, a suitable tone, and a logical structure.",
+    research: "Compare reliable sources, explain the evidence, and distinguish facts from assumptions."
 
   };
 
