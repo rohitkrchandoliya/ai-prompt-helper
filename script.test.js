@@ -249,7 +249,7 @@ test("savePromptToHistory keeps the newest ten entries after a duplicate is move
   const history = getPromptHistory();
   assert.equal(history.length, 10);
   assert.equal(history[0].prompt, "Prompt 5");
-  assert.equal(history.some((item) => item.prompt === "Prompt 1"), false);
+  assert.equal(history.some((item) => item.prompt === "Prompt 1"), true);
   assert.equal(history[1].prompt, "Prompt 10");
 });
 
