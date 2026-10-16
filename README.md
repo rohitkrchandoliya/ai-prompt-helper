@@ -206,3 +206,13 @@ Choose the purpose that best describes the kind of help you want:
 - **Personal finance basics:** general budgeting and saving information, not individualized financial advice.
 
 If none fits, choose **General**. The purpose provides extra instructions; your idea still determines the specific task.
+
+## Open the app without installing dependencies
+
+Because the project is static, you can try it without installing packages:
+
+1. Download or clone the repository.
+2. Open the project folder in your file manager.
+3. Open `index.html` in a modern browser.
+
+Prompt generation and local history work in browsers that allow the page to use local storage. Some browser APIs, such as clipboard access, may be restricted when opening a file directly; if copying does not work, use the browser's manual selection option or run the page from a local web server.
