@@ -368,6 +368,7 @@
       if (event.key === "Escape" && event.currentTarget.value) {
         event.currentTarget.value = "";
         renderHistory();
+        event.currentTarget.focus();
       }
     });
 
