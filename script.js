@@ -5,6 +5,10 @@ function improvePrompt(idea, purpose = "general") {
     return "Please enter an idea before generating a prompt.";
   }
 
+  if (cleanIdea.length > 2000) {
+    return "Your idea must be 2000 characters or fewer.";
+  }
+
   const purposeInstructions = {
     general: "Give a clear, useful, well-structured response.",
     learning: "Explain step by step for a beginner and include examples.",
