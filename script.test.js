@@ -223,3 +223,18 @@ test("savePromptToHistory deduplicates legacy string entries", () => {
   }).length, 1);
   assert.equal(history[0].prompt, "Old prompt");
 });
+
+test("savePromptToHistory safely keeps malformed legacy records while deduplicating valid prompts", () => {
+  global.localStorage.setItem("promptHistory", JSON.stringify([
+    null,
+    42,
+    { other: "not a prompt" },
+    { prompt: "Keep me", createdAt: "2025-01-01T00:00:00.000Z" }
+  ]));
+
+  assert.doesNotThrow(() => savePromptToHistory("Keep me"));
+
+  const history = getPromptHistory();
+  assert.equal(history[0].prompt, "Keep me");
+  assert.equal(history.filter((item) => item && item.prompt === "Keep me").length, 1);
+});
