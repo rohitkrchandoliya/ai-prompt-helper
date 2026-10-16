@@ -650,3 +650,10 @@ test("savePromptToHistory preserves unrelated existing entries", () => {
   savePromptToHistory("Newest prompt");
   assert.deepEqual(getPromptHistory().map(item => item.prompt), ["Newest prompt", "Another prompt", "Older prompt"]);
 });
+
+test("savePromptToHistory keeps malformed legacy entries while adding valid prompts", () => {
+  global.localStorage.setItem("promptHistory", JSON.stringify([null, 7, { other: "value" }]));
+  const history = savePromptToHistory("Valid prompt");
+  assert.equal(history[0].prompt, "Valid prompt");
+  assert.deepEqual(history.slice(1), [null, 7, { other: "value" }]);
+});
