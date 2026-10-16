@@ -318,6 +318,16 @@
     });
 
     document.getElementById("clearHistory").addEventListener("click", () => {
+      const history = getPromptHistory();
+      if (history.length === 0) {
+        alert("There is no prompt history to clear.");
+        return;
+      }
+
+      if (!window.confirm("Clear all saved prompts? This cannot be undone.")) {
+        return;
+      }
+
       clearPromptHistory();
       renderHistory();
     });
