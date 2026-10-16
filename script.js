@@ -10,7 +10,10 @@ function improvePrompt(idea, purpose = "general") {
     learning: "Explain step by step for a beginner and include examples.",
     coding: "Provide working code, explain how it works, and mention edge cases.",
     writing: "Use clear language, a suitable tone, and a logical structure.",
-    research: "Compare reliable sources, explain the evidence, and distinguish facts from assumptions."
+    research: "Compare reliable sources, explain the evidence, and distinguish facts from assumptions.",
+    business: "Clarify the target audience, business objective, constraints, risks, and measurable success criteria.",
+    creative: "Offer original ideas, explore distinct directions, and explain the creative choices.",
+    resume: "Use concise, achievement-focused language, strong action verbs, and measurable results without inventing experience."
   };
 
   const normalizedPurpose = Object.hasOwn(purposeInstructions, purpose)
@@ -60,7 +63,6 @@ function savePromptToHistory(prompt) {
     );
   } catch (error) {
     // Storage can be unavailable in private browsing or restricted contexts.
-    // Return the generated history so the caller can still use the prompt.
   }
 
   return updatedHistory;
