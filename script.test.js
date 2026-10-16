@@ -81,6 +81,14 @@ test("getPromptHistory safely handles invalid JSON and non-array data", () => {
   assert.deepEqual(getPromptHistory(), []);
 });
 
+test("getPromptHistory returns an empty array when storage reads throw", () => {
+  global.localStorage.getItem = () => {
+    throw new Error("Storage is unavailable");
+  };
+
+  assert.deepEqual(getPromptHistory(), []);
+});
+
 test("savePromptToHistory adds new prompts first and limits history to ten items", () => {
   for (let index = 1; index <= 12; index += 1) {
     savePromptToHistory(`Prompt ${index}`);
