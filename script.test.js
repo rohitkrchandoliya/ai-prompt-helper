@@ -79,6 +79,24 @@ test("savePromptToHistory ignores empty values", () => {
   assert.equal(getPromptHistory().length, 1);
 });
 
+test("savePromptToHistory returns the new prompt when storage writes fail", () => {
+  global.localStorage.setItem = () => {
+    throw new Error("Storage is unavailable");
+  };
+
+  const history = savePromptToHistory("A prompt that can still be used");
+  assert.equal(history.length, 1);
+  assert.equal(history[0].prompt, "A prompt that can still be used");
+});
+
+test("clearPromptHistory does not throw when storage removal fails", () => {
+  global.localStorage.removeItem = () => {
+    throw new Error("Storage is unavailable");
+  };
+
+  assert.doesNotThrow(() => clearPromptHistory());
+});
+
 test("clearPromptHistory removes saved prompts", () => {
   savePromptToHistory("A prompt");
   clearPromptHistory();
