@@ -252,3 +252,11 @@ test("savePromptToHistory keeps the newest ten entries after a duplicate is move
   assert.equal(history.some((item) => item.prompt === "Prompt 1"), false);
   assert.equal(history[1].prompt, "Prompt 10");
 });
+
+test("improvePrompt falls back to general for non-string purpose values", () => {
+  for (const purpose of [null, undefined, 42, {}, []]) {
+    const prompt = improvePrompt("Explain a concept", purpose);
+    assert.match(prompt, /Act as an expert assistant for: general/);
+    assert.match(prompt, /Give a clear, useful, well-structured response/);
+  }
+});
