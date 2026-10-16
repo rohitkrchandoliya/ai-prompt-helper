@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +14,7 @@
       background: #f4f6f8;
       color: #222;
     }
+
     textarea, select, button {
       width: 100%;
       padding: 12px;
@@ -21,7 +22,9 @@
       box-sizing: border-box;
       font-size: 16px;
     }
+
     textarea { min-height: 120px; }
+
     button {
       background: #1769e0;
       color: white;
@@ -29,13 +32,27 @@
       border-radius: 6px;
       cursor: pointer;
     }
-    #result {
+
+    button:hover { background: #0e50b5; }
+
+    #result, .history-prompt {
       white-space: pre-wrap;
+      overflow-wrap: anywhere;
       background: white;
       padding: 15px;
       border-radius: 6px;
-      overflow-wrap: anywhere;
     }
+
+    .history-prompt {
+      border: 1px solid #ddd;
+      cursor: pointer;
+      margin: 8px 0;
+    }
+
+    .history-prompt:hover { background: #edf4ff; }
+
+    #clearHistory { background: #b42318; }
+    .muted { color: #666; }
   </style>
 </head>
 <body>
@@ -51,24 +68,71 @@
     <option value="learning">Learning</option>
     <option value="coding">Coding</option>
     <option value="writing">Writing</option>
+    <option value="research">Research</option>
   </select>
 
   <button id="improve">Improve my prompt</button>
+
   <h2>Improved prompt</h2>
   <div id="result">Your improved prompt will appear here.</div>
   <button id="copy">Copy prompt</button>
 
+  <hr>
+  <h2>Prompt History</h2>
+  <p class="muted">Your 10 most recent prompts are saved in this browser.</p>
+  <div id="historyList"></div>
+  <button id="clearHistory">Clear History</button>
+
   <script src="script.js"></script>
   <script>
+    const ideaInput = document.getElementById("idea");
+    const purposeInput = document.getElementById("purpose");
+    const result = document.getElementById("result");
+    const historyList = document.getElementById("historyList");
+
+    function renderHistory() {
+      const history = getPromptHistory();
+      historyList.replaceChildren();
+
+      if (history.length === 0) {
+        const emptyMessage = document.createElement("p");
+        emptyMessage.className = "muted";
+        emptyMessage.textContent = "No saved prompts yet.";
+        historyList.appendChild(emptyMessage);
+        return;
+      }
+
+      history.forEach((item) => {
+        const prompt = typeof item === "string" ? item : item.prompt;
+        if (typeof prompt !== "string") return;
+
+        const button = document.createElement("button");
+        button.className = "history-prompt";
+        button.textContent = prompt;
+        button.addEventListener("click", () => {
+          result.textContent = prompt;
+        });
+        historyList.appendChild(button);
+      });
+    }
+
     document.getElementById("improve").addEventListener("click", () => {
-      const idea = document.getElementById("idea").value;
-      const purpose = document.getElementById("purpose").value;
-      document.getElementById("result").textContent =
-        improvePrompt(idea, purpose);
+      const prompt = improvePrompt(
+        ideaInput.value,
+        purposeInput.value
+      );
+
+      result.textContent = prompt;
+
+      if (ideaInput.value.trim()) {
+        savePromptToHistory(prompt);
+        renderHistory();
+      }
     });
 
     document.getElementById("copy").addEventListener("click", async () => {
-      const text = document.getElementById("result").textContent;
+      const text = result.textContent;
+
       try {
         await navigator.clipboard.writeText(text);
         alert("Prompt copied!");
@@ -76,6 +140,14 @@
         alert("Copy failed. Please copy the text manually.");
       }
     });
+
+    document.getElementById("clearHistory").addEventListener("click", () => {
+      clearPromptHistory();
+      renderHistory();
+    });
+
+    renderHistory();
   </script>
 </body>
 </html>
+```
