@@ -624,3 +624,8 @@ test("getPromptHistory returns an empty list for an empty stored value", () => {
   global.localStorage.setItem("promptHistory", "");
   assert.deepEqual(getPromptHistory(), []);
 });
+
+test("getPromptHistory returns an empty list when storage reads throw", () => {
+  global.localStorage.getItem = () => { throw new Error("Storage is unavailable"); };
+  assert.deepEqual(getPromptHistory(), []);
+});
