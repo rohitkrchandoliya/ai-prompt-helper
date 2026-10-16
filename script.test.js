@@ -636,3 +636,10 @@ test("clearPromptHistory removes the persisted history key", () => {
   assert.equal(global.localStorage.getItem("promptHistory"), null);
   assert.deepEqual(getPromptHistory(), []);
 });
+
+test("savePromptToHistory detects duplicates in legacy string entries", () => {
+  global.localStorage.setItem("promptHistory", JSON.stringify(["Legacy prompt"]));
+  const history = savePromptToHistory("Legacy prompt");
+  assert.equal(history.length, 1);
+  assert.equal(history[0].prompt, "Legacy prompt");
+});
