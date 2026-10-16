@@ -629,3 +629,10 @@ test("getPromptHistory returns an empty list when storage reads throw", () => {
   global.localStorage.getItem = () => { throw new Error("Storage is unavailable"); };
   assert.deepEqual(getPromptHistory(), []);
 });
+
+test("clearPromptHistory removes the persisted history key", () => {
+  savePromptToHistory("Prompt to clear");
+  clearPromptHistory();
+  assert.equal(global.localStorage.getItem("promptHistory"), null);
+  assert.deepEqual(getPromptHistory(), []);
+});
