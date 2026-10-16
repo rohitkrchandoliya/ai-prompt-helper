@@ -364,6 +364,13 @@
 
     document.getElementById("historySearch").addEventListener("input", renderHistory);
 
+    document.getElementById("historySearch").addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && event.currentTarget.value) {
+        event.currentTarget.value = "";
+        renderHistory();
+      }
+    });
+
     document.getElementById("clearHistorySearch").addEventListener("click", () => {
       const search = document.getElementById("historySearch");
       search.value = "";
