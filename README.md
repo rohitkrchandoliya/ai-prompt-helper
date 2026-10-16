@@ -120,3 +120,8 @@ While the idea field is focused, press **Ctrl+Enter** on Windows/Linux or **Comm
 ### Import file limits
 
 Prompt-history JSON imports are limited to 1 MB. If an export is larger, open it in a text editor and keep only the prompts you want to restore, then save it as a smaller JSON file. The app keeps at most ten valid prompts in history.
+
+
+### Where saved prompts are stored
+
+Prompt history is stored in this browser's local storage on this device. It is not automatically synced to another browser or device. Clearing site data or using a different browser profile can remove or hide the saved history, so export a JSON backup if you need to keep it.
