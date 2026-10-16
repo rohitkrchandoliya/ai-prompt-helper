@@ -507,3 +507,9 @@ test("improvePrompt trims surrounding whitespace from valid ideas", () => {
   assert.match(prompt, /Task: Explain renewable energy/);
   assert.doesNotMatch(prompt, /Task:  Explain renewable energy  /);
 });
+
+test("improvePrompt rejects ideas containing only whitespace", () => {
+  for (const idea of [" ", "\n\t", "   \n  "]) {
+    assert.equal(improvePrompt(idea), "Please enter an idea before generating a prompt.");
+  }
+});
