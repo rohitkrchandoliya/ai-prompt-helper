@@ -423,3 +423,11 @@ test("teaching purpose supports structured, learner-centered lessons", () => {
   assert.match(prompt, /checks for understanding/i);
   assert.match(prompt, /accessible alternatives/i);
 });
+
+test("interview preparation purpose includes tailored guidance", () => {
+  const prompt = improvePrompt("Prepare for a junior developer interview", "interview");
+  assert.match(prompt, /Act as an expert assistant for: interview/);
+  assert.match(prompt, /role and seniority/i);
+  assert.match(prompt, /strong answers/i);
+  assert.match(prompt, /fabricated credentials/i);
+});
