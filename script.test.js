@@ -619,3 +619,8 @@ test("removePromptFromHistory rejects fractional indexes", () => {
   assert.deepEqual(removePromptFromHistory(0.5), before);
   assert.deepEqual(getPromptHistory(), before);
 });
+
+test("getPromptHistory returns an empty list for an empty stored value", () => {
+  global.localStorage.setItem("promptHistory", "");
+  assert.deepEqual(getPromptHistory(), []);
+});
