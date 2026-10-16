@@ -138,3 +138,7 @@ If you plan to reset your browser, clear site data, or move to another device, e
 ### Prompt history retention
 
 The app keeps up to ten saved prompts. Saving another prompt moves it to the top, and duplicate prompt text is not stored as a second history entry. Export important prompts if you need a longer-term archive.
+
+### Keyboard navigation
+
+You can use Tab and Shift+Tab to move between the idea field, purpose selector, prompt actions, and history controls. Use Enter or Space to activate focused buttons. The prompt generation shortcut is Ctrl+Enter on Windows/Linux or Command+Enter on macOS while the idea field is focused.
