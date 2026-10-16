@@ -120,10 +120,12 @@
 
     function renderHistory() {
       const searchTerm = document.getElementById("historySearch").value.trim().toLowerCase();
-      const history = getPromptHistory().filter((item) => {
-        const prompt = typeof item === "string" ? item : item && item.prompt;
-        return typeof prompt === "string" && prompt.toLowerCase().includes(searchTerm);
-      });
+      const history = getPromptHistory()
+        .map((item, index) => ({ item, index }))
+        .filter(({ item }) => {
+          const prompt = typeof item === "string" ? item : item && item.prompt;
+          return typeof prompt === "string" && prompt.toLowerCase().includes(searchTerm);
+        });
       historyList.replaceChildren();
 
       if (history.length === 0) {
@@ -136,7 +138,7 @@
         return;
       }
 
-      history.forEach((item) => {
+      history.forEach(({ item, index }) => {
         const prompt = typeof item === "string" ? item : item.prompt;
         if (typeof prompt !== "string") return;
 
@@ -167,7 +169,7 @@
         deleteButton.textContent = "Delete this prompt";
         deleteButton.setAttribute("aria-label", "Delete this saved prompt");
         deleteButton.addEventListener("click", () => {
-          removePromptFromHistory(history.indexOf(item));
+          removePromptFromHistory(index);
           renderHistory();
         });
         historyItem.appendChild(deleteButton);
