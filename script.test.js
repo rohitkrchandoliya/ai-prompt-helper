@@ -539,3 +539,15 @@ test("improvePrompt falls back to general guidance for unknown purposes", () => 
   assert.match(prompt, /Act as an expert assistant for: general/);
   assert.match(prompt, /Give a clear, useful, well-structured response/);
 });
+
+test("removePromptFromHistory returns the in-memory deletion when storage writes fail", () => {
+  savePromptToHistory("Keep this prompt");
+  savePromptToHistory("Remove this prompt");
+  global.localStorage.setItem = () => {
+    throw new Error("Storage is unavailable");
+  };
+
+  const remaining = removePromptFromHistory(0);
+  assert.equal(remaining.length, 1);
+  assert.equal(remaining[0].prompt, "Keep this prompt");
+});
