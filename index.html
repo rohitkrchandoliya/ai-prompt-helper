@@ -93,6 +93,7 @@
   <h2>Improved prompt</h2>
   <div id="result" role="status" aria-live="polite" aria-atomic="true">Your improved prompt will appear here.</div>
   <button id="copy">Copy prompt</button>
+  <button id="copyResult" type="button">Select prompt text</button>
   <button id="downloadPrompt" type="button">Download prompt (.txt)</button>
 
   <hr>
@@ -243,6 +244,15 @@
 
       return copied;
     }
+
+    document.getElementById("copyResult").addEventListener("click", () => {
+      const range = document.createRange();
+      range.selectNodeContents(result);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      result.focus?.();
+    });
 
     document.getElementById("copy").addEventListener("click", async () => {
       const text = result.textContent;
