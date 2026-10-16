@@ -84,6 +84,7 @@
   <h2>Improved prompt</h2>
   <div id="result" role="status" aria-live="polite" aria-atomic="true">Your improved prompt will appear here.</div>
   <button id="copy">Copy prompt</button>
+  <button id="downloadPrompt" type="button">Download prompt (.txt)</button>
 
   <hr>
   <h2>Prompt History</h2>
@@ -215,6 +216,25 @@
       } else {
         alert("Copy was blocked. Select the prompt and copy it manually.");
       }
+    });
+
+    document.getElementById("downloadPrompt").addEventListener("click", () => {
+      const text = result.textContent;
+      if (!text || text === "Your improved prompt will appear here.") {
+        alert("Generate a prompt before downloading it.");
+        ideaInput.focus();
+        return;
+      }
+
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "ai-prompt.txt";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
     });
 
     document.getElementById("clearHistory").addEventListener("click", () => {
