@@ -191,3 +191,18 @@ The application stores history locally and cannot recover a file that was never 
 ### Search behavior
 
 Prompt-history search ignores letter case and matches partial text. For example, searching for `CLIMATE` also finds a saved prompt containing `climate`. Leading and trailing spaces in the search query are ignored.
+
+## Choosing a prompt purpose
+
+Choose the purpose that best describes the kind of help you want:
+
+- **Learning / Teaching:** beginner-friendly explanations, lesson objectives, and checks for understanding.
+- **Coding / Security review:** implementation guidance, edge cases, threat identification, and defensive mitigations.
+- **Research / Data analysis:** evidence, data quality, patterns, and limitations.
+- **Writing / Email / Marketing / Translation:** audience-appropriate wording, tone, and clear communication goals.
+- **Business / Product design / Planning:** objectives, user needs, milestones, constraints, and trade-offs.
+- **Resume / Interview:** role-specific career materials and realistic practice without inventing credentials.
+- **Creative / Presentation:** original directions or a clear audience-focused narrative.
+- **Personal finance basics:** general budgeting and saving information, not individualized financial advice.
+
+If none fits, choose **General**. The purpose provides extra instructions; your idea still determines the specific task.
