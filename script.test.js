@@ -167,6 +167,16 @@ test("removePromptFromHistory safely ignores invalid indexes", () => {
   assert.equal(removePromptFromHistory(1.5).length, 1);
 });
 
+test("removePromptFromHistory does not throw when storage writes fail", () => {
+  savePromptToHistory("first");
+  savePromptToHistory("second");
+  global.localStorage.setItem = () => {
+    throw new Error("Storage is unavailable");
+  };
+
+  assert.doesNotThrow(() => removePromptFromHistory(0));
+});
+
 test("savePromptToHistory moves an exact duplicate to the top instead of storing it twice", () => {
   savePromptToHistory("First prompt");
   savePromptToHistory("Second prompt");
