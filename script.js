@@ -1,6 +1,5 @@
-
 function improvePrompt(idea, purpose = "general") {
-  const cleanIdea = idea.trim();
+  const cleanIdea = typeof idea === "string" ? idea.trim() : "";
 
   if (!cleanIdea) {
     return "Please enter an idea before generating a prompt.";
@@ -14,11 +13,13 @@ function improvePrompt(idea, purpose = "general") {
     research: "Compare reliable sources, explain the evidence, and distinguish facts from assumptions."
   };
 
-  const instruction =
-    purposeInstructions[purpose] || purposeInstructions.general;
+  const normalizedPurpose = Object.hasOwn(purposeInstructions, purpose)
+    ? purpose
+    : "general";
+  const instruction = purposeInstructions[normalizedPurpose];
 
   return [
-    `Act as an expert assistant for: ${purpose}.`,
+    `Act as an expert assistant for: ${normalizedPurpose}.`,
     `Task: ${cleanIdea}`,
     `Instructions: ${instruction}`,
     "Ask clarifying questions if important details are missing.",
