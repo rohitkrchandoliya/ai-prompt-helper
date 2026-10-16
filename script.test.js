@@ -339,3 +339,13 @@ test("clearPromptHistory leaves history empty after a normal clear", () => {
 
   assert.deepEqual(getPromptHistory(), []);
 });
+
+test("removePromptFromHistory rejects fractional and string indexes", () => {
+  savePromptToHistory("First prompt");
+  savePromptToHistory("Second prompt");
+  const before = getPromptHistory();
+
+  assert.deepEqual(removePromptFromHistory(0.5), before);
+  assert.deepEqual(removePromptFromHistory("0"), before);
+  assert.equal(getPromptHistory().length, 2);
+});
