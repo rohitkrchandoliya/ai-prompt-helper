@@ -27,6 +27,20 @@ Prompt History helps users revisit prompts they have previously generated.
 3. Copy a saved prompt when you want to reuse it.
 4. Use the available clear-history control to remove saved history.
 
+
+### Export and import history
+
+- Select **Export history (.json)** to download your saved prompts as a JSON file.
+- Select a previously exported prompt-history JSON file in **Import prompt history (.json)** to restore it.
+- Import replaces the current history and keeps at most ten valid, non-empty prompts.
+- Review the file before importing it. Imported content is displayed as text; do not import files from sources you do not trust.
+
+### Manage individual prompts
+
+- Use **Delete this prompt** to remove one saved entry without clearing the rest.
+- Use **Clear History** only when you want to remove all saved prompt history.
+- Use **Download prompt (.txt)** to save the currently displayed prompt separately.
+
 ### Troubleshooting
 
 **My saved prompts are missing**
