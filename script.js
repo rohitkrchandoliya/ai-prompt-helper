@@ -17,7 +17,8 @@ function improvePrompt(idea, purpose = "general") {
     research: "Compare reliable sources, explain the evidence, and distinguish facts from assumptions.",
     business: "Clarify the target audience, business objective, constraints, risks, and measurable success criteria.",
     creative: "Offer original ideas, explore distinct directions, and explain the creative choices.",
-    resume: "Use concise, achievement-focused language, strong action verbs, and measurable results without inventing experience."
+    resume: "Use concise, achievement-focused language, strong action verbs, and measurable results without inventing experience.",
+    planning: "Break the goal into actionable steps, estimate timelines, identify dependencies, and include risks and checkpoints."
   };
 
   const normalizedPurpose = Object.hasOwn(purposeInstructions, purpose)
