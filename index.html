@@ -161,6 +161,8 @@
 
       if (history.length === 0) {
         const emptyMessage = document.createElement("p");
+        emptyMessage.setAttribute("role", "status");
+        emptyMessage.setAttribute("aria-live", "polite");
         emptyMessage.className = "muted";
         emptyMessage.textContent = searchTerm
           ? "No saved prompts match your search."
