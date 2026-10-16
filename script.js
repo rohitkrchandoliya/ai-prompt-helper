@@ -22,6 +22,7 @@ function improvePrompt(idea, purpose = "general") {
     marketing: "Define the audience and value proposition, match the channel, use a specific call to action, and avoid unsupported claims.",
     teaching: "Set measurable learning objectives, adapt explanations to learner level, include activities and checks for understanding, and suggest accessible alternatives.",
     interview: "Tailor questions to the role and seniority, provide realistic practice prompts, explain what strong answers demonstrate, and avoid fabricated credentials.",
+    productDesign: "Identify user needs and constraints, compare solution options, explain usability trade-offs, and propose ways to validate the design with users.",
     dataAnalysis: "Clarify the question, inspect data quality, explain the method, summarize key patterns, and state limitations without overstating causation.",
     email: "Clarify the recipient and goal, use an appropriate tone, keep the message concise, and include a clear next step when useful."
   };
