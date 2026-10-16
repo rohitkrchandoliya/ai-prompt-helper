@@ -603,3 +603,11 @@ test("improvePrompt safely rejects non-string ideas", () => {
     assert.equal(improvePrompt(idea), "Please enter an idea before generating a prompt.");
   }
 });
+
+test("saving an existing prompt moves it to the newest history position", () => {
+  savePromptToHistory("First prompt");
+  savePromptToHistory("Second prompt");
+  savePromptToHistory("First prompt");
+  assert.deepEqual(getPromptHistory().map(item => item.prompt), ["First prompt", "Second prompt"]);
+  assert.equal(getPromptHistory().filter(item => item.prompt === "First prompt").length, 1);
+});
