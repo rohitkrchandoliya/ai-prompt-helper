@@ -281,3 +281,13 @@ test("savePromptToHistory trims new prompts and deduplicates normalized variants
   assert.equal(history.length, 1);
   assert.equal(history[0].prompt, "Build a useful tool");
 });
+
+test("savePromptToHistory can create an in-memory result when storage reads fail", () => {
+  global.localStorage.getItem = () => {
+    throw new Error("Storage is unavailable");
+  };
+
+  const history = savePromptToHistory("A prompt while storage is unavailable");
+  assert.equal(history.length, 1);
+  assert.equal(history[0].prompt, "A prompt while storage is unavailable");
+});
