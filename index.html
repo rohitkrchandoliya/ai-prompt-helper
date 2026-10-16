@@ -64,6 +64,7 @@
   <label for="idea">Your idea</label>
   <textarea id="idea" placeholder="Example: Explain climate change" maxlength="2000" aria-describedby="ideaCounter"></textarea>
   <p id="ideaCounter" class="muted" aria-live="polite">0 / 2000 characters</p>
+  <button id="clearIdea" type="button">Clear idea</button>
   <p class="muted">Tip: Press Ctrl + Enter (or Cmd + Enter on Mac) to improve your prompt.</p>
 
   <label for="purpose">Choose a purpose</label>
@@ -103,6 +104,12 @@
     }
 
     ideaInput.addEventListener("input", updateIdeaCounter);
+
+    document.getElementById("clearIdea").addEventListener("click", () => {
+      ideaInput.value = "";
+      updateIdeaCounter();
+      ideaInput.focus();
+    });
 
     function renderHistory() {
       const history = getPromptHistory();
