@@ -349,3 +349,17 @@ test("removePromptFromHistory rejects fractional and string indexes", () => {
   assert.deepEqual(removePromptFromHistory("0"), before);
   assert.equal(getPromptHistory().length, 2);
 });
+
+test("removePromptFromHistory removes the requested item and preserves remaining order", () => {
+  savePromptToHistory("First prompt");
+  savePromptToHistory("Second prompt");
+  savePromptToHistory("Third prompt");
+
+  const before = getPromptHistory();
+  const result = removePromptFromHistory(1);
+
+  assert.equal(result.length, 2);
+  assert.equal(result[0].prompt, before[0].prompt);
+  assert.equal(result[1].prompt, before[2].prompt);
+  assert.deepEqual(getPromptHistory(), result);
+});
