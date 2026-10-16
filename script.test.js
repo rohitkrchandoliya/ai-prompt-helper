@@ -597,3 +597,9 @@ test("improvePrompt falls back to general guidance for incorrectly cased purpose
   const prompt = improvePrompt("Explain a concept", "Learning");
   assert.match(prompt, /Act as an expert assistant for: general/);
 });
+
+test("improvePrompt safely rejects non-string ideas", () => {
+  for (const idea of [null, undefined, 7, {}, []]) {
+    assert.equal(improvePrompt(idea), "Please enter an idea before generating a prompt.");
+  }
+});
