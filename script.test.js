@@ -272,3 +272,12 @@ test("improvePrompt rejects ideas longer than 2000 characters", () => {
     "Your idea must be 2000 characters or fewer."
   );
 });
+
+test("savePromptToHistory trims new prompts and deduplicates normalized variants", () => {
+  savePromptToHistory("  Build a useful tool  ");
+  savePromptToHistory("Build a useful tool");
+
+  const history = getPromptHistory();
+  assert.equal(history.length, 1);
+  assert.equal(history[0].prompt, "Build a useful tool");
+});
