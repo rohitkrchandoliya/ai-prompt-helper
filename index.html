@@ -60,6 +60,7 @@
 
   <label for="idea">Your idea</label>
   <textarea id="idea" placeholder="Example: Explain climate change"></textarea>
+  <p class="muted">Tip: Press Ctrl + Enter (or Cmd + Enter on Mac) to improve your prompt.</p>
 
   <label for="purpose">Choose a purpose</label>
   <select id="purpose">
@@ -76,7 +77,7 @@
   <button id="improve">Improve my prompt</button>
 
   <h2>Improved prompt</h2>
-  <div id="result">Your improved prompt will appear here.</div>
+  <div id="result" role="status" aria-live="polite" aria-atomic="true">Your improved prompt will appear here.</div>
   <button id="copy">Copy prompt</button>
 
   <hr>
@@ -118,7 +119,7 @@
       });
     }
 
-    document.getElementById("improve").addEventListener("click", () => {
+    function generatePrompt() {
       const prompt = improvePrompt(
         ideaInput.value,
         purposeInput.value
@@ -129,6 +130,15 @@
       if (ideaInput.value.trim()) {
         savePromptToHistory(prompt);
         renderHistory();
+      }
+    }
+
+    document.getElementById("improve").addEventListener("click", generatePrompt);
+
+    ideaInput.addEventListener("keydown", (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+        event.preventDefault();
+        generatePrompt();
       }
     });
 
