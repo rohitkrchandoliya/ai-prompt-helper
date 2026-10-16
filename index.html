@@ -151,6 +151,15 @@
           }
         }
 
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete this prompt";
+        deleteButton.setAttribute("aria-label", "Delete this saved prompt");
+        deleteButton.addEventListener("click", () => {
+          removePromptFromHistory(history.indexOf(item));
+          renderHistory();
+        });
+        historyItem.appendChild(deleteButton);
         historyList.appendChild(historyItem);
       });
     }

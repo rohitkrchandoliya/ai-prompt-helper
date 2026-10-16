@@ -5,6 +5,7 @@ const {
   improvePrompt,
   getPromptHistory,
   savePromptToHistory,
+  removePromptFromHistory,
   clearPromptHistory
 } = require("./script.js");
 
@@ -140,4 +141,20 @@ test("resume purpose avoids invented experience", () => {
   const prompt = improvePrompt("Improve my project description", "resume");
   assert.match(prompt, /action verbs/i);
   assert.match(prompt, /without inventing experience/i);
+});
+
+test("removePromptFromHistory deletes only the selected item", () => {
+  savePromptToHistory("first");
+  savePromptToHistory("second");
+  const history = removePromptFromHistory(0);
+  assert.equal(history.length, 1);
+  assert.equal(history[0].prompt, "first");
+  assert.equal(getPromptHistory().length, 1);
+});
+
+test("removePromptFromHistory safely ignores invalid indexes", () => {
+  savePromptToHistory("keep me");
+  assert.equal(removePromptFromHistory(-1).length, 1);
+  assert.equal(removePromptFromHistory(99).length, 1);
+  assert.equal(removePromptFromHistory(1.5).length, 1);
 });
