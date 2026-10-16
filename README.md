@@ -38,6 +38,7 @@ Prompt History helps users revisit prompts they have previously generated.
 - Select **Export history (.json)** to download your saved prompts as a JSON file.
 - Select a previously exported prompt-history JSON file in **Import prompt history (.json)** to restore it.
 - Import replaces the current history and keeps at most ten valid, non-empty prompts.
+- If you want to keep the current history, export it before importing another file; import does not merge the two histories.
 - Review the file before importing it. Imported content is displayed as text; do not import files from sources you do not trust.
 
 ### Manage individual prompts
