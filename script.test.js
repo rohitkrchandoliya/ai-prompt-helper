@@ -501,3 +501,9 @@ test("getPromptHistory rejects valid JSON values that are not arrays", () => {
     assert.deepEqual(getPromptHistory(), []);
   }
 });
+
+test("improvePrompt trims surrounding whitespace from valid ideas", () => {
+  const prompt = improvePrompt("  Explain renewable energy  ", "learning");
+  assert.match(prompt, /Task: Explain renewable energy/);
+  assert.doesNotMatch(prompt, /Task:  Explain renewable energy  /);
+});
