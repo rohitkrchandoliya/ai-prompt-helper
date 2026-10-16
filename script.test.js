@@ -158,3 +158,21 @@ test("removePromptFromHistory safely ignores invalid indexes", () => {
   assert.equal(removePromptFromHistory(99).length, 1);
   assert.equal(removePromptFromHistory(1.5).length, 1);
 });
+
+test("savePromptToHistory moves an exact duplicate to the top instead of storing it twice", () => {
+  savePromptToHistory("First prompt");
+  savePromptToHistory("Second prompt");
+  savePromptToHistory("First prompt");
+
+  const history = getPromptHistory();
+  assert.equal(history.length, 2);
+  assert.equal(history[0].prompt, "First prompt");
+  assert.equal(history[1].prompt, "Second prompt");
+});
+
+test("savePromptToHistory only deduplicates exact matches", () => {
+  savePromptToHistory("Build a todo app");
+  savePromptToHistory("Build a notes app");
+
+  assert.equal(getPromptHistory().length, 2);
+});
