@@ -431,3 +431,10 @@ test("interview preparation purpose includes tailored guidance", () => {
   assert.match(prompt, /strong answers/i);
   assert.match(prompt, /fabricated credentials/i);
 });
+
+test("product design purpose covers user needs and design validation", () => {
+  const prompt = improvePrompt("Design a simple budgeting app", "productDesign");
+  assert.match(prompt, /user needs and constraints/i);
+  assert.match(prompt, /usability trade-offs/i);
+  assert.match(prompt, /validate the design with users/i);
+});
