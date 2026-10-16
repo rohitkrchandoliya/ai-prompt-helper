@@ -381,3 +381,12 @@ test("improvePrompt falls back to general for inherited purpose keys", () => {
     assert.match(prompt, /Give a clear, useful, well-structured response/);
   }
 });
+
+test("planning purpose produces actionable steps, timelines, dependencies, and risks", () => {
+  const prompt = improvePrompt("Organize a community event", "planning");
+  assert.match(prompt, /Act as an expert assistant for: planning/);
+  assert.match(prompt, /actionable steps/i);
+  assert.match(prompt, /timelines/i);
+  assert.match(prompt, /dependencies/i);
+  assert.match(prompt, /risks and checkpoints/i);
+});
