@@ -586,3 +586,9 @@ test("savePromptToHistory places each new prompt before older prompts", () => {
   savePromptToHistory("Newer prompt");
   assert.deepEqual(getPromptHistory().map(item => item.prompt), ["Newer prompt", "Older prompt"]);
 });
+
+test("clearPromptHistory safely handles storage removal failures", () => {
+  savePromptToHistory("Existing prompt");
+  global.localStorage.removeItem = () => { throw new Error("Storage is unavailable"); };
+  assert.doesNotThrow(() => clearPromptHistory());
+});
