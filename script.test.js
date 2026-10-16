@@ -207,3 +207,19 @@ test("savePromptToHistory deduplicates existing entries with surrounding whitesp
   assert.equal(history.filter((item) => item.prompt.trim() === "Keep this prompt").length, 1);
   assert.equal(history[0].prompt, "Keep this prompt");
 });
+
+test("savePromptToHistory deduplicates legacy string entries", () => {
+  global.localStorage.setItem("promptHistory", JSON.stringify([
+    "Old prompt",
+    { prompt: "Another prompt", createdAt: "2025-01-01T00:00:00.000Z" }
+  ]));
+
+  savePromptToHistory("Old prompt");
+
+  const history = getPromptHistory();
+  assert.equal(history.filter((item) => {
+    const savedPrompt = typeof item === "string" ? item : item.prompt;
+    return savedPrompt === "Old prompt";
+  }).length, 1);
+  assert.equal(history[0].prompt, "Old prompt");
+});
