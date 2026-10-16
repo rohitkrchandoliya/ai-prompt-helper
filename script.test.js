@@ -684,3 +684,11 @@ test("savePromptToHistory records a valid ISO timestamp", () => {
   assert.equal(Number.isNaN(Date.parse(saved.createdAt)), false);
   assert.equal(new Date(saved.createdAt).toISOString(), saved.createdAt);
 });
+test("removePromptFromHistory preserves the order of remaining prompts", () => {
+  savePromptToHistory("First prompt");
+  savePromptToHistory("Second prompt");
+  savePromptToHistory("Third prompt");
+  const remaining = removePromptFromHistory(1);
+  assert.deepEqual(remaining.map(item => item.prompt), ["Third prompt", "First prompt"]);
+  assert.deepEqual(getPromptHistory().map(item => item.prompt), ["Third prompt", "First prompt"]);
+});
