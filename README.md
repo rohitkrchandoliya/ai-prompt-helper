@@ -142,3 +142,18 @@ The app keeps up to ten saved prompts. Saving another prompt moves it to the top
 ### Keyboard navigation
 
 You can use Tab and Shift+Tab to move between the idea field, purpose selector, prompt actions, and history controls. Use Enter or Space to activate focused buttons. The prompt generation shortcut is Ctrl+Enter on Windows/Linux or Command+Enter on macOS while the idea field is focused.
+
+## Manual smoke-test checklist
+
+After changing the interface or prompt-history behavior, open the app in a browser and verify the main user flows:
+
+- Generate a prompt from a short idea and confirm the selected purpose is reflected in the result.
+- Try an empty idea and an idea at the 2,000-character limit.
+- Copy, select, and download the generated prompt.
+- Save several prompts, search for one, load it again, and delete an individual entry.
+- Export history, then import the exported JSON and confirm the expected prompts appear.
+- Import an invalid JSON file and confirm the page remains usable and displays a helpful message.
+- Clear history and confirm the app asks for confirmation before removing saved entries.
+- Reload the page and confirm saved history remains available in the same browser profile.
+
+Automated tests (`npm test`) should still pass before submitting changes. Manual checks complement automated tests; they do not replace them.
