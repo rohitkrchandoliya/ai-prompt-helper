@@ -12,8 +12,11 @@ Make prompt writing easier for students, developers, creators, and everyday user
 - Prompt improvement suggestions
 - Reusable prompt templates
 - Copy improved prompts
-- Prompt history stored in browser local storage
-- Clear saved prompt history
+- Search saved prompt history and see the total/matching prompt count
+- Select a saved prompt to load it into the improved-prompt area
+- Delete individual entries or clear saved prompt history
+- Export and import prompt history as JSON
+- Download the currently displayed prompt as a text file
 - Beginner-friendly interface
 
 ## Prompt History Guide
@@ -24,8 +27,10 @@ Prompt History helps users revisit prompts they have previously generated.
 
 1. Enter an idea and generate an improved prompt.
 2. Use the Prompt History section to review previously saved prompts.
-3. Copy a saved prompt when you want to reuse it.
-4. Use the available clear-history control to remove saved history.
+3. Select a saved prompt to load it into the improved-prompt area; then copy or download it as needed.
+4. Use **Search saved prompts** to filter history by prompt text. The count shows matches and total saved prompts while searching.
+5. Select **Clear search** to return to the full history.
+6. Use **Delete this prompt** to remove one entry or **Clear History** to remove all saved history.
 
 
 ### Export and import history
@@ -38,8 +43,9 @@ Prompt History helps users revisit prompts they have previously generated.
 ### Manage individual prompts
 
 - Use **Delete this prompt** to remove one saved entry without clearing the rest.
-- Use **Clear History** only when you want to remove all saved prompt history.
+- Use **Clear History** only when you want to remove all saved prompt history; the app asks for confirmation.
 - Use **Download prompt (.txt)** to save the currently displayed prompt separately.
+- Use **Select prompt text** to highlight the displayed prompt for manual copying.
 
 ### Troubleshooting
 
