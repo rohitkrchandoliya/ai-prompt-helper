@@ -20,6 +20,7 @@ function improvePrompt(idea, purpose = "general") {
     resume: "Use concise, achievement-focused language, strong action verbs, and measurable results without inventing experience.",
     planning: "Break the goal into actionable steps, estimate timelines, identify dependencies, and include risks and checkpoints.",
     dataAnalysis: "Clarify the question, inspect data quality, explain the method, summarize key patterns, and state limitations without overstating causation."
+    marketing: "Define the audience and value proposition, match the channel, use a specific call to action, and avoid unsupported claims."
   };
 
   const normalizedPurpose = Object.hasOwn(purposeInstructions, purpose)
