@@ -470,3 +470,11 @@ test("translation purpose preserves meaning and flags ambiguity", () => {
   assert.match(prompt, /flag ambiguous phrases/i);
   assert.match(prompt, /culturally specific wording/i);
 });
+
+test("personal finance purpose covers budgeting and avoids personalized advice claims", () => {
+  const prompt = improvePrompt("Build a monthly budget on a limited income", "personalFinance");
+  assert.match(prompt, /budgeting goals/i);
+  assert.match(prompt, /income and expense categories/i);
+  assert.match(prompt, /saving options/i);
+  assert.match(prompt, /avoid presenting general information as personalized financial advice/i);
+});
