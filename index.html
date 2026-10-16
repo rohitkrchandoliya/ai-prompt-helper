@@ -322,6 +322,11 @@
       if (!file) return;
 
       try {
+        const maxImportBytes = 1024 * 1024;
+        if (file.size > maxImportBytes) {
+          throw new Error("The selected file is larger than 1 MB.");
+        }
+
         const imported = JSON.parse(await file.text());
         if (!Array.isArray(imported)) throw new Error("Expected a JSON array.");
 
