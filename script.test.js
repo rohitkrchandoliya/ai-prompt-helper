@@ -664,3 +664,10 @@ test("email purpose guidance includes tone, concision, and a next step", () => {
   assert.match(prompt, /keep the message concise/i);
   assert.match(prompt, /clear next step/i);
 });
+test("data analysis purpose addresses data quality and limitations", () => {
+  const prompt = improvePrompt("Analyze monthly sales trends", "dataAnalysis");
+  assert.match(prompt, /Act as an expert assistant for: dataAnalysis/);
+  assert.match(prompt, /inspect data quality/i);
+  assert.match(prompt, /state limitations/i);
+  assert.match(prompt, /without overstating causation/i);
+});
