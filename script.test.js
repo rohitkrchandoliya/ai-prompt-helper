@@ -300,3 +300,15 @@ test("savePromptToHistory can create an in-memory result when storage reads fail
   assert.equal(history.length, 1);
   assert.equal(history[0].prompt, "A prompt while storage is unavailable");
 });
+
+test("savePromptToHistory retains only the ten newest unique prompts", () => {
+  for (let index = 1; index <= 12; index += 1) {
+    savePromptToHistory(`Unique prompt ${index}`);
+  }
+
+  const history = getPromptHistory();
+  assert.equal(history.length, 10);
+  assert.equal(history[0].prompt, "Unique prompt 12");
+  assert.equal(history[9].prompt, "Unique prompt 3");
+  assert.equal(history.some((item) => item.prompt === "Unique prompt 2"), false);
+});
