@@ -415,3 +415,11 @@ test("marketing purpose includes tailored campaign guidance", () => {
   assert.match(prompt, /call to action/i);
   assert.match(prompt, /unsupported claims/i);
 });
+
+test("teaching purpose supports structured, learner-centered lessons", () => {
+  const prompt = improvePrompt("Create a beginner lesson on fractions", "teaching");
+  assert.match(prompt, /Act as an expert assistant for: teaching/);
+  assert.match(prompt, /learning objectives/i);
+  assert.match(prompt, /checks for understanding/i);
+  assert.match(prompt, /accessible alternatives/i);
+});
