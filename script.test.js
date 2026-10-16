@@ -399,3 +399,11 @@ test("data analysis purpose asks for methods, patterns, and limitations", () => 
   assert.match(prompt, /limitations/i);
   assert.match(prompt, /without overstating causation/i);
 });
+
+test("email writing purpose includes tailored writing guidance", () => {
+  const prompt = improvePrompt("Write a follow-up email after a meeting", "email");
+  assert.match(prompt, new RegExp("Act as an expert assistant for: email"));
+  assert.match(prompt, /recipient and goal/i);
+  assert.match(prompt, /appropriate tone/i);
+  assert.match(prompt, /clear next step/i);
+});
