@@ -560,3 +560,8 @@ test("generated prompts consistently include task, instructions, clarification, 
   assert.match(prompt, /Ask clarifying questions if important details are missing/);
   assert.match(prompt, /State assumptions and organize the response clearly/);
 });
+
+test("improvePrompt enforces the 2000-character idea limit", () => {
+  assert.notEqual(improvePrompt("a".repeat(2000)), "Your idea must be 2000 characters or fewer.");
+  assert.equal(improvePrompt("a".repeat(2001)), "Your idea must be 2000 characters or fewer.");
+});
