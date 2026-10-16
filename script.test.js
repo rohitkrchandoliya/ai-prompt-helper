@@ -677,3 +677,10 @@ test("savePromptToHistory detects duplicates in object entries with surrounding 
   assert.equal(history.length, 1);
   assert.equal(history[0].prompt, "Existing prompt");
 });
+test("savePromptToHistory records a valid ISO timestamp", () => {
+  savePromptToHistory("Timestamped prompt");
+  const saved = getPromptHistory()[0];
+  assert.equal(typeof saved.createdAt, "string");
+  assert.equal(Number.isNaN(Date.parse(saved.createdAt)), false);
+  assert.equal(new Date(saved.createdAt).toISOString(), saved.createdAt);
+});
