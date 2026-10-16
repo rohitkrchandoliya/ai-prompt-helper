@@ -321,6 +321,11 @@
         const imported = JSON.parse(await file.text());
         if (!Array.isArray(imported)) throw new Error("Expected a JSON array.");
 
+        if (getPromptHistory().length > 0 &&
+            !window.confirm("Importing this file will replace your current prompt history. Export a backup first if you want to keep it. Continue?")) {
+          return;
+        }
+
         const seenPrompts = new Set();
         const validPrompts = imported.map((item) => {
           const prompt = typeof item === "string" ? item : item && item.prompt;
