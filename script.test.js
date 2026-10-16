@@ -123,3 +123,21 @@ test("clearPromptHistory removes saved prompts", () => {
 
   assert.deepEqual(getPromptHistory(), []);
 });
+
+test("business purpose includes objective and success criteria guidance", () => {
+  const prompt = improvePrompt("Launch a local service", "business");
+  assert.match(prompt, /target audience/i);
+  assert.match(prompt, /success criteria/i);
+});
+
+test("creative purpose encourages original directions", () => {
+  const prompt = improvePrompt("Write a fantasy opening", "creative");
+  assert.match(prompt, /original ideas/i);
+  assert.match(prompt, /creative choices/i);
+});
+
+test("resume purpose avoids invented experience", () => {
+  const prompt = improvePrompt("Improve my project description", "resume");
+  assert.match(prompt, /action verbs/i);
+  assert.match(prompt, /without inventing experience/i);
+});
