@@ -132,14 +132,44 @@
       }
     });
 
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch {
+          // Try the compatibility fallback below.
+        }
+      }
+
+      const temporaryInput = document.createElement("textarea");
+      temporaryInput.value = text;
+      temporaryInput.setAttribute("readonly", "");
+      temporaryInput.style.position = "fixed";
+      temporaryInput.style.opacity = "0";
+      document.body.appendChild(temporaryInput);
+      temporaryInput.select();
+
+      let copied = false;
+      try {
+        copied = document.execCommand("copy");
+      } catch {
+        copied = false;
+      } finally {
+        temporaryInput.remove();
+      }
+
+      return copied;
+    }
+
     document.getElementById("copy").addEventListener("click", async () => {
       const text = result.textContent;
+      const copied = await copyText(text);
 
-      try {
-        await navigator.clipboard.writeText(text);
+      if (copied) {
         alert("Prompt copied!");
-      } catch {
-        alert("Copy failed. Please copy the text manually.");
+      } else {
+        alert("Copy was blocked. Select the prompt and copy it manually.");
       }
     });
 
