@@ -565,3 +565,11 @@ test("improvePrompt enforces the 2000-character idea limit", () => {
   assert.notEqual(improvePrompt("a".repeat(2000)), "Your idea must be 2000 characters or fewer.");
   assert.equal(improvePrompt("a".repeat(2001)), "Your idea must be 2000 characters or fewer.");
 });
+
+test("savePromptToHistory retains only the ten newest prompts", () => {
+  for (let i = 1; i <= 12; i++) savePromptToHistory("Prompt " + i);
+  const history = getPromptHistory();
+  assert.equal(history.length, 10);
+  assert.equal(history[0].prompt, "Prompt 12");
+  assert.equal(history[9].prompt, "Prompt 3");
+});
