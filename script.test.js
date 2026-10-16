@@ -349,3 +349,13 @@ test("removePromptFromHistory rejects fractional and string indexes", () => {
   assert.deepEqual(removePromptFromHistory("0"), before);
   assert.equal(getPromptHistory().length, 2);
 });
+
+test("savePromptToHistory keeps duplicate detection case-sensitive", () => {
+  savePromptToHistory("Create Invoice");
+  savePromptToHistory("create invoice");
+
+  const history = getPromptHistory();
+  assert.equal(history.length, 2);
+  assert.equal(history[0].prompt, "create invoice");
+  assert.equal(history[1].prompt, "Create Invoice");
+});
