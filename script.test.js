@@ -34,6 +34,17 @@ test("improvePrompt explains when the idea is empty", () => {
   );
 });
 
+test("improvePrompt safely handles non-string ideas", () => {
+  assert.equal(
+    improvePrompt(null),
+    "Please enter an idea before generating a prompt."
+  );
+  assert.equal(
+    improvePrompt(undefined),
+    "Please enter an idea before generating a prompt."
+  );
+});
+
 test("improvePrompt trims the idea and uses the selected purpose", () => {
   const prompt = improvePrompt("  Build a todo app  ", "coding");
 
@@ -42,9 +53,18 @@ test("improvePrompt trims the idea and uses the selected purpose", () => {
   assert.match(prompt, /Act as an expert assistant for: coding/);
 });
 
-test("improvePrompt falls back to general instructions for unknown purposes", () => {
+test("improvePrompt normalizes unsupported purposes to general", () => {
   const prompt = improvePrompt("Plan a trip", "unknown-purpose");
 
+  assert.match(prompt, /Give a clear, useful, well-structured response/);
+  assert.match(prompt, /Act as an expert assistant for: general/);
+  assert.doesNotMatch(prompt, /unknown-purpose/);
+});
+
+test("improvePrompt does not accept inherited object properties as purposes", () => {
+  const prompt = improvePrompt("Write a summary", "constructor");
+
+  assert.match(prompt, /Act as an expert assistant for: general/);
   assert.match(prompt, /Give a clear, useful, well-structured response/);
 });
 
