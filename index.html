@@ -198,7 +198,7 @@
         const deleteButton = document.createElement("button");
         deleteButton.type = "button";
         deleteButton.textContent = "Delete this prompt";
-        deleteButton.setAttribute("aria-label", "Delete this saved prompt");
+        deleteButton.setAttribute("aria-label", `Delete saved prompt: ${prompt.slice(0, 60)}`);
         deleteButton.addEventListener("click", () => {
           removePromptFromHistory(index);
           renderHistory();
