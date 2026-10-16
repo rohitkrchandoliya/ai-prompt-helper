@@ -68,6 +68,21 @@ function savePromptToHistory(prompt) {
   return updatedHistory;
 }
 
+function removePromptFromHistory(index) {
+  if (!Number.isInteger(index) || index < 0) return getPromptHistory();
+
+  const history = getPromptHistory();
+  if (index >= history.length) return history;
+  history.splice(index, 1);
+
+  try {
+    localStorage.setItem("promptHistory", JSON.stringify(history));
+  } catch (error) {
+    // Keep the current in-memory result available when storage is unavailable.
+  }
+  return history;
+}
+
 function clearPromptHistory() {
   try {
     localStorage.removeItem("promptHistory");
@@ -81,6 +96,7 @@ if (typeof module !== "undefined") {
     improvePrompt,
     getPromptHistory,
     savePromptToHistory,
+    removePromptFromHistory,
     clearPromptHistory
   };
 }
