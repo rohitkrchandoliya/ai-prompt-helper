@@ -438,3 +438,11 @@ test("product design purpose covers user needs and design validation", () => {
   assert.match(prompt, /usability trade-offs/i);
   assert.match(prompt, /validate the design with users/i);
 });
+
+test("customer support purpose gives empathetic, actionable guidance", () => {
+  const prompt = improvePrompt("Respond to a customer whose order is delayed", "customerSupport");
+  assert.match(prompt, /acknowledge the customer's issue/i);
+  assert.match(prompt, /diagnostic questions/i);
+  assert.match(prompt, /clear steps/i);
+  assert.match(prompt, /escalation/i);
+});
