@@ -3,8 +3,8 @@ function improvePrompt(idea, purpose = "general") {
   const cleanIdea = idea.trim();
 
   if (!cleanIdea) {
-    return "Please enter an idea first.";
-  }
+  return "Please enter an idea before generating a prompt.";
+}
 
   const purposeInstructions = {
     general: "Give a clear, useful, well-structured response.",
