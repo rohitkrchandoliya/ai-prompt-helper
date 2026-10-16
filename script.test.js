@@ -260,3 +260,15 @@ test("improvePrompt falls back to general for non-string purpose values", () => 
     assert.match(prompt, /Give a clear, useful, well-structured response/);
   }
 });
+
+test("improvePrompt accepts ideas at the 2000-character limit", () => {
+  const idea = "a".repeat(2000);
+  assert.match(improvePrompt(idea), /Task: a{2000}/);
+});
+
+test("improvePrompt rejects ideas longer than 2000 characters", () => {
+  assert.equal(
+    improvePrompt("a".repeat(2001)),
+    "Your idea must be 2000 characters or fewer."
+  );
+});
