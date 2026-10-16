@@ -60,3 +60,11 @@ Prompt history is stored in the browser's local storage. Avoid storing passwords
 ## Status
 
 Features are being added incrementally. Check the application to see which features are currently available.
+
+## Browser Compatibility and Limitations
+
+- Prompt history requires browser JavaScript and local storage to be available.
+- Private browsing modes or browser settings may restrict local storage.
+- Clearing the browser's site data may delete saved prompts.
+- Prompt history is stored separately in each browser profile and is not automatically shared across devices.
+- If history does not appear, check that JavaScript is enabled and refresh the application.
