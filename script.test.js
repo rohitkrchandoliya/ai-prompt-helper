@@ -238,3 +238,17 @@ test("savePromptToHistory safely keeps malformed legacy records while deduplicat
   assert.equal(history[0].prompt, "Keep me");
   assert.equal(history.filter((item) => item && item.prompt === "Keep me").length, 1);
 });
+
+test("savePromptToHistory keeps the newest ten entries after a duplicate is moved to the top", () => {
+  for (let index = 1; index <= 10; index += 1) {
+    savePromptToHistory(`Prompt ${index}`);
+  }
+
+  savePromptToHistory("Prompt 5");
+
+  const history = getPromptHistory();
+  assert.equal(history.length, 10);
+  assert.equal(history[0].prompt, "Prompt 5");
+  assert.equal(history.some((item) => item.prompt === "Prompt 1"), false);
+  assert.equal(history[1].prompt, "Prompt 10");
+});
