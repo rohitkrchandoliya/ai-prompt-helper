@@ -187,3 +187,7 @@ Blank entries and duplicate prompt text are skipped. Imported prompts are trimme
 5. Keep more than one dated backup if you need to recover earlier versions; import replaces the current list rather than merging it.
 
 The application stores history locally and cannot recover a file that was never exported.
+
+### Search behavior
+
+Prompt-history search ignores letter case and matches partial text. For example, searching for `CLIMATE` also finds a saved prompt containing `climate`. Leading and trailing spaces in the search query are ignored.
