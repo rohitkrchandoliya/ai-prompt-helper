@@ -274,8 +274,9 @@
 
     document.getElementById("downloadPrompt").addEventListener("click", () => {
       const text = result.textContent;
-      if (!text || text === "Your improved prompt will appear here.") {
-        alert("Generate a prompt before downloading it.");
+      if (!text.trim() || text === "Your improved prompt will appear here." ||
+          text.trim() === "Please enter an idea before generating a prompt.") {
+        alert("Generate a valid prompt before downloading it.");
         ideaInput.focus();
         return;
       }
