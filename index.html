@@ -49,6 +49,9 @@
     }
 
     .history-prompt:hover { background: #edf4ff; }
+    .history-item { margin: 8px 0 14px; }
+    .history-item .history-prompt { margin: 0; }
+    .history-timestamp { display: block; margin: 4px 2px; font-size: 12px; }
 
     #clearHistory { background: #b42318; }
     .muted { color: #666; }
@@ -109,13 +112,29 @@
         const prompt = typeof item === "string" ? item : item.prompt;
         if (typeof prompt !== "string") return;
 
+        const historyItem = document.createElement("div");
+        historyItem.className = "history-item";
+
         const button = document.createElement("button");
         button.className = "history-prompt";
         button.textContent = prompt;
         button.addEventListener("click", () => {
           result.textContent = prompt;
         });
-        historyList.appendChild(button);
+        historyItem.appendChild(button);
+
+        if (item && typeof item === "object" && item.createdAt) {
+          const savedDate = new Date(item.createdAt);
+          if (!Number.isNaN(savedDate.getTime())) {
+            const timestamp = document.createElement("time");
+            timestamp.className = "muted history-timestamp";
+            timestamp.dateTime = savedDate.toISOString();
+            timestamp.textContent = `Saved ${savedDate.toLocaleString()}`;
+            historyItem.appendChild(timestamp);
+          }
+        }
+
+        historyList.appendChild(historyItem);
       });
     }
 
