@@ -255,7 +255,14 @@
     });
 
     document.getElementById("copy").addEventListener("click", async () => {
-      const text = result.textContent;
+      const text = result.textContent.trim();
+      if (!text || text === "Your improved prompt will appear here." ||
+          text === "Please enter an idea before generating a prompt.") {
+        alert("Generate a valid prompt before copying it.");
+        ideaInput.focus();
+        return;
+      }
+
       const copied = await copyText(text);
 
       if (copied) {
