@@ -90,3 +90,17 @@ Features are being added incrementally. Check the application to see which featu
 - Clearing the browser's site data may delete saved prompts.
 - Prompt history is stored separately in each browser profile and is not automatically shared across devices.
 - If history does not appear, check that JavaScript is enabled and refresh the application.
+
+## Run tests locally
+
+The project includes automated tests for prompt generation and prompt-history behavior. You need Node.js 18 or newer.
+
+1. Clone or download this repository.
+2. Open a terminal in the project folder.
+3. Run the test suite:
+
+   ```bash
+   npm test
+   ```
+
+The tests use Node.js's built-in test runner, so no additional test dependencies need to be installed. A failing test prints details in the terminal; fix the issue and run `npm test` again before submitting a pull request.
