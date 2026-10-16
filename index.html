@@ -88,6 +88,8 @@
 
   <hr>
   <h2>Prompt History</h2>
+  <label for="historySearch">Search saved prompts</label>
+  <input id="historySearch" type="search" placeholder="Search your prompt history">
   <p class="muted">Your 10 most recent prompts are saved in this browser.</p>
   <div id="historyList"></div>
   <button id="exportHistory" type="button">Export history (.json)</button>
@@ -116,7 +118,11 @@
     });
 
     function renderHistory() {
-      const history = getPromptHistory();
+      const searchTerm = document.getElementById("historySearch").value.trim().toLowerCase();
+      const history = getPromptHistory().filter((item) => {
+        const prompt = typeof item === "string" ? item : item && item.prompt;
+        return typeof prompt === "string" && prompt.toLowerCase().includes(searchTerm);
+      });
       historyList.replaceChildren();
 
       if (history.length === 0) {
@@ -296,6 +302,8 @@
         event.target.value = "";
       }
     });
+
+    document.getElementById("historySearch").addEventListener("input", renderHistory);
 
     document.getElementById("clearHistory").addEventListener("click", () => {
       clearPromptHistory();
