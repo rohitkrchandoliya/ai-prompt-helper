@@ -611,3 +611,11 @@ test("saving an existing prompt moves it to the newest history position", () => 
   assert.deepEqual(getPromptHistory().map(item => item.prompt), ["First prompt", "Second prompt"]);
   assert.equal(getPromptHistory().filter(item => item.prompt === "First prompt").length, 1);
 });
+
+test("removePromptFromHistory rejects fractional indexes", () => {
+  savePromptToHistory("First prompt");
+  savePromptToHistory("Second prompt");
+  const before = getPromptHistory();
+  assert.deepEqual(removePromptFromHistory(0.5), before);
+  assert.deepEqual(getPromptHistory(), before);
+});
