@@ -359,3 +359,17 @@ test("savePromptToHistory keeps duplicate detection case-sensitive", () => {
   assert.equal(history[0].prompt, "create invoice");
   assert.equal(history[1].prompt, "Create Invoice");
 });
+
+test("removePromptFromHistory preserves remaining item order", () => {
+  savePromptToHistory("First prompt");
+  savePromptToHistory("Second prompt");
+  savePromptToHistory("Third prompt");
+
+  const before = getPromptHistory();
+  const result = removePromptFromHistory(1);
+
+  assert.equal(result.length, 2);
+  assert.equal(result[0].prompt, before[0].prompt);
+  assert.equal(result[1].prompt, before[2].prompt);
+  assert.deepEqual(getPromptHistory(), result);
+});
