@@ -373,3 +373,11 @@ test("removePromptFromHistory preserves remaining item order", () => {
   assert.equal(result[1].prompt, before[2].prompt);
   assert.deepEqual(getPromptHistory(), result);
 });
+
+test("improvePrompt falls back to general for inherited purpose keys", () => {
+  for (const purpose of ["constructor", "toString", "__proto__"]) {
+    const prompt = improvePrompt("Explain a concept", purpose);
+    assert.match(prompt, /Act as an expert assistant for: general/);
+    assert.match(prompt, /Give a clear, useful, well-structured response/);
+  }
+});
