@@ -407,3 +407,11 @@ test("email writing purpose includes tailored writing guidance", () => {
   assert.match(prompt, /appropriate tone/i);
   assert.match(prompt, /clear next step/i);
 });
+
+test("marketing purpose includes tailored campaign guidance", () => {
+  const prompt = improvePrompt("Promote a new online course", "marketing");
+  assert.match(prompt, /Act as an expert assistant for: marketing/);
+  assert.match(prompt, /value proposition/i);
+  assert.match(prompt, /call to action/i);
+  assert.match(prompt, /unsupported claims/i);
+});
