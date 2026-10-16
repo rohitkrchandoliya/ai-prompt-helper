@@ -657,3 +657,10 @@ test("savePromptToHistory keeps malformed legacy entries while adding valid prom
   assert.equal(history[0].prompt, "Valid prompt");
   assert.deepEqual(history.slice(1), [null, 7, { other: "value" }]);
 });
+test("email purpose guidance includes tone, concision, and a next step", () => {
+  const prompt = improvePrompt("Ask a colleague to review a document", "email");
+  assert.match(prompt, /Act as an expert assistant for: email/);
+  assert.match(prompt, /appropriate tone/i);
+  assert.match(prompt, /keep the message concise/i);
+  assert.match(prompt, /clear next step/i);
+});
