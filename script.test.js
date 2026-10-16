@@ -330,3 +330,12 @@ test("getPromptHistory returns a fresh array without persisting caller mutations
   assert.equal(secondRead.length, 1);
   assert.equal(secondRead[0].prompt, "Saved prompt");
 });
+
+test("clearPromptHistory leaves history empty after a normal clear", () => {
+  savePromptToHistory("First saved prompt");
+  savePromptToHistory("Second saved prompt");
+
+  clearPromptHistory();
+
+  assert.deepEqual(getPromptHistory(), []);
+});
