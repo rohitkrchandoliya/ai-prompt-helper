@@ -90,6 +90,7 @@
   <h2>Prompt History</h2>
   <label for="historySearch">Search saved prompts</label>
   <input id="historySearch" type="search" placeholder="Search your prompt history">
+  <button id="clearHistorySearch" type="button">Clear search</button>
   <p class="muted">Your 10 most recent prompts are saved in this browser.</p>
   <div id="historyList"></div>
   <button id="exportHistory" type="button">Export history (.json)</button>
@@ -306,6 +307,13 @@
     });
 
     document.getElementById("historySearch").addEventListener("input", renderHistory);
+
+    document.getElementById("clearHistorySearch").addEventListener("click", () => {
+      const search = document.getElementById("historySearch");
+      search.value = "";
+      renderHistory();
+      search.focus();
+    });
 
     document.getElementById("clearHistory").addEventListener("click", () => {
       clearPromptHistory();
