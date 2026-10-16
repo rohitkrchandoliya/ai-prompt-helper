@@ -551,3 +551,12 @@ test("removePromptFromHistory returns the in-memory deletion when storage writes
   assert.equal(remaining.length, 1);
   assert.equal(remaining[0].prompt, "Keep this prompt");
 });
+
+test("generated prompts consistently include task, instructions, clarification, and assumptions", () => {
+  const prompt = improvePrompt("Plan a study schedule", "planning");
+
+  assert.match(prompt, /Task: Plan a study schedule/);
+  assert.match(prompt, /Instructions: Break the goal into actionable steps/i);
+  assert.match(prompt, /Ask clarifying questions if important details are missing/);
+  assert.match(prompt, /State assumptions and organize the response clearly/);
+});
