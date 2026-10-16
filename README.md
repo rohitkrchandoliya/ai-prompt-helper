@@ -112,3 +112,7 @@ The app does not provide a server-side backup or an undo feature for cleared his
 ### Why did importing a file change my history?
 
 Import is a restore operation, not a merge operation. It replaces the saved list with valid imported prompts, limited to ten entries. Keep a separate exported backup when you need to preserve multiple lists.
+
+### Keyboard shortcut
+
+While the idea field is focused, press **Ctrl+Enter** on Windows/Linux or **Command+Enter** on macOS to generate a prompt without clicking the Generate button.
