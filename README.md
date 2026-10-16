@@ -177,3 +177,13 @@ Blank entries and duplicate prompt text are skipped. Imported prompts are trimme
 - Press **Escape** while the search field is focused to clear the query.
 - Select **Clear search** to remove the filter with the mouse or keyboard.
 - The saved-prompt count shows the number of matches and the total number of valid saved prompts while filtering.
+
+### Recommended history backup workflow
+
+1. Select **Export history (.json)** before importing another list or clearing history.
+2. Store the downloaded JSON file somewhere you control, outside the browser's site data.
+3. Before restoring, confirm the file is a prompt-history JSON export or follows the supported array format above.
+4. Import the backup and review the resulting prompt count.
+5. Keep more than one dated backup if you need to recover earlier versions; import replaces the current list rather than merging it.
+
+The application stores history locally and cannot recover a file that was never exported.
