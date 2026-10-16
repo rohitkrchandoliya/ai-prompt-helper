@@ -446,3 +446,11 @@ test("customer support purpose gives empathetic, actionable guidance", () => {
   assert.match(prompt, /clear steps/i);
   assert.match(prompt, /escalation/i);
 });
+
+test("security review purpose prioritizes threats and defensive mitigations", () => {
+  const prompt = improvePrompt("Review my app's security", "securityReview");
+  assert.match(prompt, /trust boundaries/i);
+  assert.match(prompt, /realistic threats/i);
+  assert.match(prompt, /defensive mitigations/i);
+  assert.match(prompt, /verified findings from assumptions/i);
+});
