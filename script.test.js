@@ -671,3 +671,9 @@ test("data analysis purpose addresses data quality and limitations", () => {
   assert.match(prompt, /state limitations/i);
   assert.match(prompt, /without overstating causation/i);
 });
+test("savePromptToHistory detects duplicates in object entries with surrounding whitespace", () => {
+  global.localStorage.setItem("promptHistory", JSON.stringify([{ prompt: "  Existing prompt  " }]));
+  const history = savePromptToHistory("Existing prompt");
+  assert.equal(history.length, 1);
+  assert.equal(history[0].prompt, "Existing prompt");
+});
