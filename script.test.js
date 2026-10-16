@@ -513,3 +513,13 @@ test("improvePrompt rejects ideas containing only whitespace", () => {
     assert.equal(improvePrompt(idea), "Please enter an idea before generating a prompt.");
   }
 });
+
+test("savePromptToHistory ignores non-string and blank inputs", () => {
+  savePromptToHistory("Existing prompt");
+  const before = getPromptHistory();
+
+  for (const value of [null, undefined, 42, {}, "", "   \n"]) {
+    assert.deepEqual(savePromptToHistory(value), before);
+  }
+  assert.deepEqual(getPromptHistory(), before);
+});
