@@ -454,3 +454,11 @@ test("security review purpose prioritizes threats and defensive mitigations", ()
   assert.match(prompt, /defensive mitigations/i);
   assert.match(prompt, /verified findings from assumptions/i);
 });
+
+test("presentation purpose supports clear, audience-focused slide structure", () => {
+  const prompt = improvePrompt("Create a presentation about renewable energy", "presentation");
+  assert.match(prompt, /audience and objective/i);
+  assert.match(prompt, /clear narrative/i);
+  assert.match(prompt, /speaker notes/i);
+  assert.match(prompt, /concise closing/i);
+});
