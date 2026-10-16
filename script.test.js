@@ -462,3 +462,11 @@ test("presentation purpose supports clear, audience-focused slide structure", ()
   assert.match(prompt, /speaker notes/i);
   assert.match(prompt, /concise closing/i);
 });
+
+test("translation purpose preserves meaning and flags ambiguity", () => {
+  const prompt = improvePrompt("Translate a product description into Spanish", "translation");
+  assert.match(prompt, /preserve the original meaning/i);
+  assert.match(prompt, /tone/i);
+  assert.match(prompt, /flag ambiguous phrases/i);
+  assert.match(prompt, /culturally specific wording/i);
+});
