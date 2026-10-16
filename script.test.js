@@ -533,3 +533,9 @@ test("savePromptToHistory returns the updated list when storage writes fail", ()
   assert.equal(history.length, 1);
   assert.equal(history[0].prompt, "Available in memory only");
 });
+
+test("improvePrompt falls back to general guidance for unknown purposes", () => {
+  const prompt = improvePrompt("Explain a useful concept", "unknown-purpose");
+  assert.match(prompt, /Act as an expert assistant for: general/);
+  assert.match(prompt, /Give a clear, useful, well-structured response/);
+});
