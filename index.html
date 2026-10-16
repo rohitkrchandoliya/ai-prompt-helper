@@ -132,15 +132,19 @@
     function renderHistory() {
       const searchTerm = document.getElementById("historySearch").value.trim().toLowerCase();
       const allHistory = getPromptHistory();
-      const history = allHistory
+      const validHistory = allHistory
         .map((item, index) => ({ item, index }))
         .filter(({ item }) => {
           const prompt = typeof item === "string" ? item : item && item.prompt;
-          return typeof prompt === "string" && prompt.toLowerCase().includes(searchTerm);
+          return typeof prompt === "string" && prompt.trim().length > 0;
         });
+      const history = validHistory.filter(({ item }) => {
+        const prompt = typeof item === "string" ? item : item.prompt;
+        return prompt.toLowerCase().includes(searchTerm);
+      });
       document.getElementById("historyCount").textContent = searchTerm
-        ? `${history.length} of ${allHistory.length} saved prompts`
-        : `${allHistory.length} saved prompt${allHistory.length === 1 ? "" : "s"}`;
+        ? `${history.length} of ${validHistory.length} saved prompts`
+        : `${validHistory.length} saved prompt${validHistory.length === 1 ? "" : "s"}`;
       historyList.replaceChildren();
 
       if (history.length === 0) {
