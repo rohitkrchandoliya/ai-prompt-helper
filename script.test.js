@@ -573,3 +573,10 @@ test("savePromptToHistory retains only the ten newest prompts", () => {
   assert.equal(history[0].prompt, "Prompt 12");
   assert.equal(history[9].prompt, "Prompt 3");
 });
+
+test("savePromptToHistory avoids duplicates after trimming surrounding whitespace", () => {
+  savePromptToHistory("A useful prompt");
+  savePromptToHistory("  A useful prompt  ");
+  assert.equal(getPromptHistory().length, 1);
+  assert.equal(getPromptHistory()[0].prompt, "A useful prompt");
+});
