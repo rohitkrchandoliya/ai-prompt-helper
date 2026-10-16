@@ -312,3 +312,11 @@ test("savePromptToHistory retains only the ten newest unique prompts", () => {
   assert.equal(history[9].prompt, "Unique prompt 3");
   assert.equal(history.some((item) => item.prompt === "Unique prompt 2"), false);
 });
+
+test("clearPromptHistory does not throw when storage removal fails", () => {
+  global.localStorage.removeItem = () => {
+    throw new Error("Storage is unavailable");
+  };
+
+  assert.doesNotThrow(() => clearPromptHistory());
+});
