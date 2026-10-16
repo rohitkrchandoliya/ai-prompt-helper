@@ -51,7 +51,8 @@ function savePromptToHistory(prompt) {
   const normalizedPrompt = prompt.trim();
   const withoutDuplicate = history.filter((item) => {
     const savedPrompt = typeof item === "string" ? item : item && item.prompt;
-    return savedPrompt !== normalizedPrompt;
+    return typeof savedPrompt !== "string" ||
+      savedPrompt.trim() !== normalizedPrompt;
   });
   const updatedHistory = [
     {

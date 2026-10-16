@@ -184,3 +184,16 @@ test("savePromptToHistory only deduplicates exact matches", () => {
 
   assert.equal(getPromptHistory().length, 2);
 });
+
+test("savePromptToHistory deduplicates existing entries with surrounding whitespace", () => {
+  global.localStorage.setItem("promptHistory", JSON.stringify([
+    { prompt: "  Keep this prompt  ", createdAt: "2025-01-01T00:00:00.000Z" },
+    { prompt: "Another prompt", createdAt: "2025-01-02T00:00:00.000Z" }
+  ]));
+
+  savePromptToHistory("Keep this prompt");
+
+  const history = getPromptHistory();
+  assert.equal(history.filter((item) => item.prompt.trim() === "Keep this prompt").length, 1);
+  assert.equal(history[0].prompt, "Keep this prompt");
+});
