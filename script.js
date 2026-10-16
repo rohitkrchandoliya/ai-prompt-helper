@@ -11,6 +11,8 @@ function improvePrompt(idea, purpose = "general") {
     learning: "Explain step by step for a beginner and include examples.",
     coding: "Provide working code, explain how it works, and mention edge cases.",
     writing: "Use clear language, a suitable tone, and a logical structure."
+    research: "Compare reliable sources, explain the evidence, and distinguish facts from assumptions.",
+
   };
 
   const instruction =
