@@ -104,3 +104,11 @@ The project includes automated tests for prompt generation and prompt-history be
    ```
 
 The tests use Node.js's built-in test runner, so no additional test dependencies need to be installed. A failing test prints details in the terminal; fix the issue and run `npm test` again before submitting a pull request.
+
+### Can I recover history after clearing it?
+
+The app does not provide a server-side backup or an undo feature for cleared history. If you need to keep prompts, export your history to JSON before clearing it or changing browser data. Importing a backup replaces the currently saved history, so export the current version first if you want to keep it too.
+
+### Why did importing a file change my history?
+
+Import is a restore operation, not a merge operation. It replaces the saved list with valid imported prompts, limited to ten entries. Keep a separate exported backup when you need to preserve multiple lists.
