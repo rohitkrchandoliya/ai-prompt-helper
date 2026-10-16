@@ -130,3 +130,7 @@ Prompt history is stored in this browser's local storage on this device. It is n
 ### Troubleshooting: history does not persist
 
 If saved prompts disappear after closing the page, check whether the browser blocks site storage, runs in private browsing mode, or clears site data on exit. Export your prompt history before clearing browser data. If storage is unavailable, history may not persist between sessions.
+
+### Before resetting your browser
+
+If you plan to reset your browser, clear site data, or move to another device, export your prompt history JSON first and keep the file somewhere safe. The app stores history locally and cannot recover data after browser storage is deleted.
