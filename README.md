@@ -61,6 +61,7 @@ Prompt history is stored in the browser's local storage. Avoid storing passwords
 
 Features are being added incrementally. Check the application to see which features are currently available.
 
+
 ## Browser Compatibility and Limitations
 
 - Prompt history requires browser JavaScript and local storage to be available.
