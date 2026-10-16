@@ -27,6 +27,7 @@ function improvePrompt(idea, purpose = "general") {
     securityReview: "Identify assets and trust boundaries, prioritize realistic threats, recommend defensive mitigations, and distinguish verified findings from assumptions.",
     presentation: "Define the audience and objective, organize a clear narrative, keep each slide focused on one idea, and include speaker notes and a concise closing.",
     translation: "Preserve the original meaning, tone, names, and formatting; flag ambiguous phrases, and explain culturally specific wording instead of silently changing it.",
+    personalFinance: "Organize budgeting goals, income and expense categories, practical saving options, and trade-offs; state assumptions and avoid presenting general information as personalized financial advice.",
     dataAnalysis: "Clarify the question, inspect data quality, explain the method, summarize key patterns, and state limitations without overstating causation.",
     email: "Clarify the recipient and goal, use an appropriate tone, keep the message concise, and include a clear next step when useful."
   };
