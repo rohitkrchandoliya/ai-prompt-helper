@@ -488,3 +488,9 @@ test("removePromptFromHistory rejects negative and out-of-range indexes without 
   assert.deepEqual(removePromptFromHistory(2), before);
   assert.deepEqual(getPromptHistory(), before);
 });
+
+test("getPromptHistory returns an empty list when stored JSON is malformed", () => {
+  global.localStorage.setItem("promptHistory", "{not valid json");
+
+  assert.deepEqual(getPromptHistory(), []);
+});
