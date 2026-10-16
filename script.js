@@ -27,6 +27,50 @@ function improvePrompt(idea, purpose = "general") {
   ].join("\n\n");
 }
 
+function getPromptHistory() {
+  try {
+    const history = JSON.parse(
+      localStorage.getItem("promptHistory") || "[]"
+    );
+
+    return Array.isArray(history) ? history : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function savePromptToHistory(prompt) {
+  if (typeof prompt !== "string" || !prompt.trim()) {
+    return getPromptHistory();
+  }
+
+  const history = getPromptHistory();
+
+  const updatedHistory = [
+    {
+      prompt: prompt.trim(),
+      createdAt: new Date().toISOString()
+    },
+    ...history
+  ].slice(0, 10);
+
+  localStorage.setItem(
+    "promptHistory",
+    JSON.stringify(updatedHistory)
+  );
+
+  return updatedHistory;
+}
+
+function clearPromptHistory() {
+  localStorage.removeItem("promptHistory");
+}
+
 if (typeof module !== "undefined") {
-  module.exports = { improvePrompt };
+  module.exports = {
+    improvePrompt,
+    getPromptHistory,
+    savePromptToHistory,
+    clearPromptHistory
+  };
 }
