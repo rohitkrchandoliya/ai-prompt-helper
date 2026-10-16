@@ -216,7 +216,7 @@
 
       result.textContent = prompt;
 
-      if (ideaInput.value.trim()) {
+      if (ideaInput.value.trim() && ideaInput.value.trim().length <= 2000) {
         savePromptToHistory(prompt);
         renderHistory();
       }
