@@ -580,3 +580,9 @@ test("savePromptToHistory avoids duplicates after trimming surrounding whitespac
   assert.equal(getPromptHistory().length, 1);
   assert.equal(getPromptHistory()[0].prompt, "A useful prompt");
 });
+
+test("savePromptToHistory places each new prompt before older prompts", () => {
+  savePromptToHistory("Older prompt");
+  savePromptToHistory("Newer prompt");
+  assert.deepEqual(getPromptHistory().map(item => item.prompt), ["Newer prompt", "Older prompt"]);
+});
