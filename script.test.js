@@ -494,3 +494,10 @@ test("getPromptHistory returns an empty list when stored JSON is malformed", () 
 
   assert.deepEqual(getPromptHistory(), []);
 });
+
+test("getPromptHistory rejects valid JSON values that are not arrays", () => {
+  for (const stored of ['null', '42', '"prompt"', '{"prompt":"value"}']) {
+    global.localStorage.setItem("promptHistory", stored);
+    assert.deepEqual(getPromptHistory(), []);
+  }
+});
