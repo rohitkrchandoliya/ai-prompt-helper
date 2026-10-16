@@ -134,3 +134,7 @@ If saved prompts disappear after closing the page, check whether the browser blo
 ### Before resetting your browser
 
 If you plan to reset your browser, clear site data, or move to another device, export your prompt history JSON first and keep the file somewhere safe. The app stores history locally and cannot recover data after browser storage is deleted.
+
+### Prompt history retention
+
+The app keeps up to ten saved prompts. Saving another prompt moves it to the top, and duplicate prompt text is not stored as a second history entry. Export important prompts if you need a longer-term archive.
