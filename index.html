@@ -62,7 +62,8 @@
   <p>Turn a simple idea into a clearer AI prompt.</p>
 
   <label for="idea">Your idea</label>
-  <textarea id="idea" placeholder="Example: Explain climate change"></textarea>
+  <textarea id="idea" placeholder="Example: Explain climate change" maxlength="2000" aria-describedby="ideaCounter"></textarea>
+  <p id="ideaCounter" class="muted" aria-live="polite">0 / 2000 characters</p>
   <p class="muted">Tip: Press Ctrl + Enter (or Cmd + Enter on Mac) to improve your prompt.</p>
 
   <label for="purpose">Choose a purpose</label>
@@ -95,6 +96,13 @@
     const purposeInput = document.getElementById("purpose");
     const result = document.getElementById("result");
     const historyList = document.getElementById("historyList");
+    const ideaCounter = document.getElementById("ideaCounter");
+
+    function updateIdeaCounter() {
+      ideaCounter.textContent = `${ideaInput.value.length} / 2000 characters`;
+    }
+
+    ideaInput.addEventListener("input", updateIdeaCounter);
 
     function renderHistory() {
       const history = getPromptHistory();
@@ -207,6 +215,7 @@
       renderHistory();
     });
 
+    updateIdeaCounter();
     renderHistory();
   </script>
 </body>
