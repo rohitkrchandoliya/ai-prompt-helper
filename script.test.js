@@ -320,3 +320,13 @@ test("clearPromptHistory does not throw when storage removal fails", () => {
 
   assert.doesNotThrow(() => clearPromptHistory());
 });
+
+test("getPromptHistory returns a fresh array without persisting caller mutations", () => {
+  savePromptToHistory("Saved prompt");
+  const firstRead = getPromptHistory();
+  firstRead.push({ prompt: "Not saved" });
+
+  const secondRead = getPromptHistory();
+  assert.equal(secondRead.length, 1);
+  assert.equal(secondRead[0].prompt, "Saved prompt");
+});
