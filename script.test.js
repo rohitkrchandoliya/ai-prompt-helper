@@ -330,3 +330,13 @@ test("getPromptHistory returns a fresh array without persisting caller mutations
   assert.equal(secondRead.length, 1);
   assert.equal(secondRead[0].prompt, "Saved prompt");
 });
+
+test("removePromptFromHistory rejects fractional and string indexes", () => {
+  savePromptToHistory("First prompt");
+  savePromptToHistory("Second prompt");
+  const before = getPromptHistory();
+
+  assert.deepEqual(removePromptFromHistory(0.5), before);
+  assert.deepEqual(removePromptFromHistory("0"), before);
+  assert.equal(getPromptHistory().length, 2);
+});
