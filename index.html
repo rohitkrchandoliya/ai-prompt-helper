@@ -128,7 +128,9 @@
       if (history.length === 0) {
         const emptyMessage = document.createElement("p");
         emptyMessage.className = "muted";
-        emptyMessage.textContent = "No saved prompts yet.";
+        emptyMessage.textContent = searchTerm
+          ? "No saved prompts match your search."
+          : "No saved prompts yet.";
         historyList.appendChild(emptyMessage);
         return;
       }
