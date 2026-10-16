@@ -1,0 +1,12 @@
+{
+  "name": "ai-prompt-helper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A beginner-friendly tool for turning ideas into clearer AI prompts.",
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
