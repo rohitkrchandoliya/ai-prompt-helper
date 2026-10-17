@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest a useful improvement to AI Prompt Helper
- title: "[Feature]: "
+title: "[Feature]: "
 labels: enhancement
 assignees: ""
 ---
